@@ -1,19 +1,60 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import TodoMain from "./component/TodoList";
+import ErrorPage from "./ErrorPage";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  document.getElementById("root") as HTMLElement
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  /* other styles */
+  a{
+        text-decoration: none;
+        color: inherit;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    input, textarea { 
+      -moz-user-select: auto;
+      -webkit-user-select: auto;
+      -ms-user-select: auto;
+      user-select: auto;
+    }
+    input:focus {
+      outline: none;
+    }
+
+    button {
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+`;
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/todo",
+    element: <TodoMain />,
+    errorElement: <ErrorPage />,
+  },
+]);
+
+root.render(
+  <React.StrictMode>
+    <GlobalStyle />
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
