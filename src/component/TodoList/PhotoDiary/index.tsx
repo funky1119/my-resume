@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import TitleCompoent from "../Common/Title";
+import TitleCompoent from "../../Common/Title";
+import DiaryBox from "./DiaryBox";
 
 const PhotoDiary = (): JSX.Element => {
   return (
@@ -8,6 +9,9 @@ const PhotoDiary = (): JSX.Element => {
       <div>
         <TitleCompoent title={"Photo Diary"} />
       </div>
+      <DiaryWrap>
+        <DiaryBox />
+      </DiaryWrap>
     </PhotoDiaryBdoy>
   );
 };
@@ -19,4 +23,8 @@ const PhotoDiaryBdoy = styled.div`
   height: 28%;
   padding: 20px;
   margin-top: 1.8%;
+`;
+
+const DiaryWrap = styled.div`
+  margin-top: 30px;
 `;
